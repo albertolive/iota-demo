@@ -4,11 +4,11 @@ import { Field, ErrorMessage } from 'formik';
 
 import { Container } from './styles';
 
-function Input({ type, name }) {
+function Input({ type, name, maxLength }) {
   return (
     <Container>
-      <Field type={type} name={name} />
-      <ErrorMessage name={name} component="div" />
+      <Field type={type} name={name} maxLength={maxLength} />
+      <ErrorMessage name={name} component="span" />
     </Container>
   );
 }

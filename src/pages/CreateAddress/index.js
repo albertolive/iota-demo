@@ -8,6 +8,7 @@ import iota from 'api';
 import Input from 'common/Form/Input';
 import Button from 'common/Form/Button';
 
+import { Validation } from './validations';
 import { Container, Content } from './styles';
 
 function CreateAddress() {
@@ -40,21 +41,10 @@ function CreateAddress() {
 
   const renderForm = () => (
     <Content>
-      <Formik
-        initialValues={{ seed }}
-        enableReinitialize
-        validate={values => {
-          let errors = {};
-          if (!values.seed) {
-            errors.seed = 'Required';
-          }
-          return errors;
-        }}
-        onSubmit={handleSubmit}
-      >
+      <Formik initialValues={{ seed }} enableReinitialize validationSchema={Validation} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form>
-            <Input type="seed" name="seed" />
+            <Input type="seed" name="seed" maxLength={81} />
             <Button type="submit" text="Create address" isSubmitting={isSubmitting} />
           </Form>
         )}

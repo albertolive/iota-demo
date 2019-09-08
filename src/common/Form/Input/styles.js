@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
 export const Container = styled('div')`
+  position: relative;
+
   input {
     margin: 0;
     width: 98%;
@@ -19,5 +21,13 @@ export const Container = styled('div')`
     transition: box-shadow 0.1s ease, border-color 0.1s ease, -webkit-box-shadow 0.1s ease;
     box-shadow: none;
     margin-bottom: 16px;
+  }
+
+  span {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    color: red;
+    font-size: 12px;
   }
 `;
