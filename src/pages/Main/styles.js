@@ -15,13 +15,7 @@ export const Container = styled('div')`
 `;
 
 export const Content = styled('div')`
-  display: flex;
   position: sticky;
+  width: 100%;
   padding: 20px;
-  flex: 1;
-
-  div[role='group'][tabindex] {
-    display: flex;
-    flex-grow: 1;
-  }
 `;

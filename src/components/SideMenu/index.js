@@ -9,6 +9,7 @@ function SideMenu() {
     <Container>
       <nav>
         <NavLink to="node-info" text="Node info" />
+        <NavLink to="create-seed" text="Create seed" />
         <NavLink to="create-address" text="Create address" />
       </nav>
     </Container>

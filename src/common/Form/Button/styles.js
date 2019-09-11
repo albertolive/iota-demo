@@ -8,12 +8,10 @@ export const Container = styled('div')`
     outline: 0;
     border: none;
     vertical-align: baseline;
-    margin: 0 0.25em 0 0;
-    padding: 0.78571429em 1.5em 0.78571429em;
+    padding: 12px;
     text-transform: none;
     text-shadow: none;
     font-weight: 700;
-    line-height: 1em;
     font-style: normal;
     text-align: center;
     text-decoration: none;
