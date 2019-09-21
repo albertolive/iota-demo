@@ -1,23 +1,19 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 
 import sjcl from 'sjcl';
 import { Formik } from 'formik';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import Button from 'common/Form/Button';
-import TextField, { Input } from 'common/Form/Input';
-
-import { setItem, getItem } from 'utils/localStorage';
+import TextField from 'common/Form/Input';
 
 import { Validation } from './validations';
-import { Container, SeedRow } from './styles';
+import { Container } from './styles';
 
-function CreateSeed() {
+function CreateSeed({ onCreateSeed }) {
   const [seed, setSeed] = useState('');
 
-  const seeds = getItem('seeds') || [];
-
-  const handleSetSeed = () => {
+  const handleCreateSeed = () => {
     let seed = '';
 
     for (
@@ -31,9 +27,7 @@ function CreateSeed() {
 
   const handleSubmit = async ({ name, seed }, { setSubmitting, resetForm }) => {
     try {
-      const newSeeds = [...seeds, { name, seed }];
-
-      setItem('seeds', newSeeds);
+      onCreateSeed({ name, seed });
       setSubmitting(false);
       resetForm();
       setSeed('');
@@ -70,42 +64,19 @@ function CreateSeed() {
     </Formik>
   );
 
-  const renderSeeds = () => {
-    if (!seeds.length) return null;
-
-    return (
-      <>
-        <h1>Seeds</h1>
-        {seeds.map(({ name, seed }, i) => (
-          <SeedRow key={i}>
-            <Row middle="xs">
-              <Col xs={12} md={2}>
-                <div>{name}</div>
-              </Col>
-              <Col xs={12} md={10}>
-                <Input name={name} value={seed} disabled />
-              </Col>
-            </Row>
-          </SeedRow>
-        ))}
-      </>
-    );
-  };
-
   return (
     <Container>
       <Grid fluid>
         <Row center="xs">
-          <Button text="Generate seed" onClick={handleSetSeed} size="big" />
+          <Button text="Generate new seed" onClick={handleCreateSeed} size="big" />
         </Row>
         <Row center="xs">
           <p>(This seed is generated in your browser and not sent anywhere.)</p>
         </Row>
         {seed && renderForm()}
-        {renderSeeds()}
       </Grid>
     </Container>
   );
 }
 
-export default CreateSeed;
+export default memo(CreateSeed);

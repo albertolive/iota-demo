@@ -7,6 +7,7 @@ import { Container, Content } from './styles';
 const Header = lazy(() => import('components/Header'));
 const SideMenu = lazy(() => import('components/SideMenu'));
 const NodeInfo = lazy(() => import('pages/NodeInfo'));
+const Wallet = lazy(() => import('pages/Wallet'));
 const CreateSeed = lazy(() => import('pages/CreateSeed'));
 const CreateAddress = lazy(() => import('pages/CreateAddress'));
 
@@ -20,8 +21,9 @@ function Main() {
           <Suspense fallback={<div />}>
             <Router>
               <NodeInfo path="/node-info" />
-              <CreateSeed path="/create-seed" />
-              <CreateAddress path="/create-address" />
+              <Wallet path="/wallet" />
+              <CreateSeed path="/seed" />
+              <CreateAddress path="/address" />
             </Router>
           </Suspense>
         </Content>

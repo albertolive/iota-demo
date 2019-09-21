@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Field, ErrorMessage } from 'formik';
 
 import { Container, Label } from './styles';
 
-export function Input({ type, name, maxLength, value, disabled }) {
+function InputField({ type, name, maxLength, value, disabled }) {
   return (
     <Container disabled={disabled}>
       <input type={type} name={name} maxLength={maxLength} value={value} disabled={disabled} />
     </Container>
   );
 }
+
+export const Input = memo(InputField);
 
 function TextField({ type, name, maxLength, disabled, label }) {
   return (
@@ -22,4 +24,4 @@ function TextField({ type, name, maxLength, disabled, label }) {
   );
 }
 
-export default TextField;
+export default memo(TextField);

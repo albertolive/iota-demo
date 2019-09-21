@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const Container = styled('div')`
   button {
-    cursor: pointer;
     display: inline-block;
     min-height: 1em;
     outline: 0;
@@ -30,9 +29,11 @@ export const Container = styled('div')`
     background-image: -webkit-linear-gradient(45deg, #06e89d 0%, #10c0b2 100%);
     color: #fff;
     font-size: ${props => (props.size === 'big' ? '1.28571429rem' : '1rem')};
+    opacity: ${props => (props.disabled ? '0.6' : '1')};
+    cursor: ${props => (props.disabled ? 'initial' : 'pointer')};
 
     &:hover {
-      opacity: 0.8;
+      opacity: ${props => (props.disabled ? '0.6' : '0.8')};
     }
   }
 `;

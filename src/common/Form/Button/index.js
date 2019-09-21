@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Container } from './styles';
 
-function Button({ type = 'text', text, isSubmitting, onClick, size }) {
+function Button({ type = 'text', text, isSubmitting, onClick, size, disabled }) {
   return (
-    <Container size={size}>
-      <button type={text} disabled={isSubmitting} onClick={onClick}>
+    <Container size={size} disabled={disabled}>
+      <button type={text} disabled={isSubmitting || disabled} onClick={onClick}>
         {text}
       </button>
     </Container>
   );
 }
 
-export default Button;
+export default memo(Button);
