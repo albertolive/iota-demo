@@ -26,6 +26,9 @@ export const Container = styled('div')`
   }
 
   .Dropdown-placeholder {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .Dropdown-menu {

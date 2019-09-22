@@ -1,11 +1,14 @@
-import React, { memo, useState, useCallback, useMemo } from 'react';
+import React, { memo, lazy, Suspense, useState, useCallback, useMemo } from 'react';
+
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { setItem, getItem } from 'utils/localStorage';
 
-import CreateSeed from 'pages/CreateSeed';
-import AccountInfo from 'components/AccountInfo';
-
 import Dropdown from 'common/Form/Dropdown';
+import Loading from 'common/Loading';
+
+const CreateSeed = lazy(() => import('pages/CreateSeed'));
+const AccountInfo = lazy(() => import('components/AccountInfo'));
 
 function Wallet() {
   const [seed, setSeed] = useState('');
@@ -38,12 +41,20 @@ function Wallet() {
   const renderAccountInfo = useMemo(() => (seed.length ? <AccountInfo seed={seed} /> : null), [seed]);
 
   return (
-    <>
-      {renderCreateSeed}
-      <h1>Seeds</h1>
-      {renderDropdownSeeds}
-      {renderAccountInfo}
-    </>
+    <Grid fluid>
+      <Row center="xs">{renderCreateSeed}</Row>
+      <Row>
+        <h1>Seed</h1>
+      </Row>
+      <Row>
+        <Col xs>{renderDropdownSeeds}</Col>
+      </Row>
+      <Suspense fallback={<Loading />}>
+        <Row>
+          <Col xs>{renderAccountInfo}</Col>
+        </Row>
+      </Suspense>
+    </Grid>
   );
 }
 

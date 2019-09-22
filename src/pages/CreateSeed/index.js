@@ -2,7 +2,7 @@ import React, { memo, useState } from 'react';
 
 import sjcl from 'sjcl';
 import { Formik } from 'formik';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Row, Col } from 'react-flexbox-grid';
 
 import Button from 'common/Form/Button';
 import TextField from 'common/Form/Input';
@@ -41,7 +41,7 @@ function CreateSeed({ onCreateSeed }) {
     <Formik initialValues={{ name: '', seed }} enableReinitialize validationSchema={Validation} onSubmit={handleSubmit}>
       {({ isSubmitting, handleSubmit }) => (
         <>
-          <Row bottom="xs">
+          <Row bottom="xs" middle="xs">
             <Col xs={12} md={4} lg={2}>
               <TextField type="name" name="name" label="Name" maxLength={20} />
             </Col>
@@ -66,15 +66,13 @@ function CreateSeed({ onCreateSeed }) {
 
   return (
     <Container>
-      <Grid fluid>
-        <Row center="xs">
-          <Button text="Generate new seed" onClick={handleCreateSeed} size="big" />
-        </Row>
-        <Row center="xs">
-          <p>(This seed is generated in your browser and not sent anywhere.)</p>
-        </Row>
-        {seed && renderForm()}
-      </Grid>
+      <Row center="xs">
+        <Button text="Generate new seed" onClick={handleCreateSeed} size="big" />
+      </Row>
+      <Row center="xs">
+        <p>(This seed is generated in your browser and not sent anywhere.)</p>
+      </Row>
+      {seed && renderForm()}
     </Container>
   );
 }

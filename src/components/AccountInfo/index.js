@@ -1,8 +1,10 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, lazy, Suspense, useEffect, useState } from 'react';
 
 import iota from 'api';
 
-import CreateAddress from 'pages/CreateAddress';
+import Loading from 'common/Loading';
+
+const CreateAddress = lazy(() => import('pages/CreateAddress'));
 
 function AccountInfo({ seed = '' }) {
   const [accountInfo, setAccountInfo] = useState(null);
@@ -25,11 +27,15 @@ function AccountInfo({ seed = '' }) {
     };
   }, [seed]);
 
-  if (accountInfo === null) return 'loading...';
+  if (accountInfo === null) return <Loading />;
 
   const { addresses = [] } = accountInfo;
-
-  return <CreateAddress seed={seed} addresses={addresses} />;
+  console.log(accountInfo);
+  return (
+    <Suspense fallback={<Loading />}>
+      <CreateAddress seed={seed} addresses={addresses} />
+    </Suspense>
+  );
 }
 
 export default memo(AccountInfo);
